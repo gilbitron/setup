@@ -26,16 +26,16 @@ xcode-select --install
 if test ! $(which brew); then
   echo "Installing Homebrew..."
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  echo "Checking installation..."
-  brew update && brew doctor
-  export HOMEBREW_NO_INSTALL_CLEANUP=1
 fi
 
+echo "Checking installation..."
+brew update && brew doctor
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+
 echo "Installing brew packages..."
-brew tap caskroom/cask
-brew tap caskroom/versions
-brew tap caskroom/fonts
+brew tap homebrew/cask
+brew tap homebrew/cask-versions
+brew tap homebrew/cask-fonts
 brew install git jq python ruby zsh wget awscli telnet tree
 
 echo "Installing Git..."
@@ -78,9 +78,9 @@ apps=(
   fantastical
   raycast
 )
-brew cask install --appdir="/Applications" ${apps[@]}
+brew install --appdir="/Applications" ${apps[@]} --cask
 
-brew cask cleanup
+brew cleanup --cask
 brew cleanup
 
 echo "Setting up Dock..."
