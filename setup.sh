@@ -15,8 +15,10 @@ sudo softwareupdate -i -a
 # Install Rosetta
 sudo softwareupdate --install-rosetta --agree-to-license
 
-echo "Creating an SSH key..."
-ssh-keygen -t rsa
+if [ ! -f ~/.ssh/id_rsa ]; then
+  echo "Creating an SSH key..."
+  ssh-keygen -t rsa
+fi
 
 echo "Installing xcode..."
 xcode-select --install
@@ -55,7 +57,9 @@ echo "Installing dotfiles from Github..."
 git clone https://github.com/gilbitron/dotfiles.git ~/.dotfiles
 sh ~/.dotfiles/install.sh
 
-# Apps
+# Install apps to /Applications
+# Default is: /Users/$user/Applications
+echo "installing apps with Cask..."
 apps=(
   beeper
   readdle-spark
@@ -74,10 +78,6 @@ apps=(
   fantastical
   raycast
 )
-
-# Install apps to /Applications
-# Default is: /Users/$user/Applications
-echo "installing apps with Cask..."
 brew cask install --appdir="/Applications" ${apps[@]}
 
 brew cask cleanup
@@ -95,7 +95,7 @@ dockutil --add "/Applications/GitHub Desktop.app" &>/dev/null
 dockutil --add "/Applications/iTerm.app" &>/dev/null
 dockutil --add "/Applications/Spotify.app" &>/dev/null
 
-echo "Setting some macOS settings..."
+echo "Setting some sensible macOS defaults..."
 # Sets the mouse speed to 3
 defaults write -g com.apple.mouse.scaling 3
 # Sets the trackpad speed to 3
