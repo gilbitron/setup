@@ -36,7 +36,7 @@ echo "Installing brew packages..."
 brew tap homebrew/cask
 brew tap homebrew/cask-versions
 brew tap homebrew/cask-fonts
-brew install git jq python ruby zsh wget awscli telnet tree
+brew install git jq python ruby zsh wget awscli telnet tree mas dockutil
 
 echo "Installing Git..."
 brew install git
@@ -77,23 +77,15 @@ apps=(
   visual-studio-code
   fantastical
   raycast
+  orbstack
 )
 brew install --appdir="/Applications" ${apps[@]} --cask
 
 brew cleanup --cask
 brew cleanup
 
-echo "Setting up Dock..."
-dockutil --add "/Applications/Beeper.app" &>/dev/null
-dockutil --add "/Applications/Spark Desktop.app" &>/dev/null
-dockutil --add "/Applications/Todoist.app" &>/dev/null
-dockutil --add "/Applications/Arc.app" &>/dev/null
-dockutil --add "/Applications/Slack.app" &>/dev/null
-dockutil --add "/Applications/Cursor.app" &>/dev/null
-dockutil --add "/Applications/Visual Studio Code.app" &>/dev/null
-dockutil --add "/Applications/GitHub Desktop.app" &>/dev/null
-dockutil --add "/Applications/iTerm.app" &>/dev/null
-dockutil --add "/Applications/Spotify.app" &>/dev/null
+echo "Installing App Store apps..."
+mas install 1091189122 # Bear
 
 echo "Setting some sensible macOS defaults..."
 # Sets the mouse speed to 3
@@ -140,6 +132,20 @@ defaults write com.apple.screencapture location -string "$HOME/Screenshots"
 defaults write com.apple.screencapture type -string "png"
 # Makes the Library folder visible in Finder
 chflags nohidden ~/Library
+
+echo "Setting up Dock..."
+dockutil --add "/Applications/Beeper.app" &>/dev/null
+dockutil --add "/Applications/Spark Desktop.app" &>/dev/null
+dockutil --add "/Applications/Todoist.app" &>/dev/null
+dockutil --add "/Applications/Arc.app" &>/dev/null
+dockutil --add "/Applications/Slack.app" &>/dev/null
+dockutil --add "/Applications/Cursor.app" &>/dev/null
+dockutil --add "/Applications/Visual Studio Code.app" &>/dev/null
+dockutil --add "/Applications/GitHub Desktop.app" &>/dev/null
+dockutil --add "/Applications/iTerm.app" &>/dev/null
+dockutil --add "/Applications/Spotify.app" &>/dev/null
+dockutil --add '~/Downloads' --view grid --display stack --sort dateadded &>/dev/null
+dockutil --add '~/Screenshots' --view grid --display stack --sort dateadded &>/dev/null
 
 killall Finder
 
