@@ -24,7 +24,7 @@ xcode-select --install
 if test ! $(which brew); then
   echo "Installing Homebrew..."
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  
+
   echo "Checking installation..."
   brew update && brew doctor
   export HOMEBREW_NO_INSTALL_CLEANUP=1
@@ -131,11 +131,6 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 defaults write com.apple.dock "expose-group-by-app" -bool true
 #"Preventing Time Machine from prompting to use new hard drives as backup volume"
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-#"Disable the sudden motion sensor as its not useful for SSDs"
-sudo pmset -a sms 0
-#"Speeding up wake from sleep to 24 hours from an hour"
-# http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
-sudo pmset -a standbydelay 86400
 #"Disable annoying backswipe in Chrome"
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 #"Setting screenshots location to ~/Screenshots"
@@ -143,11 +138,6 @@ mkdir -p "$HOME/Screenshots"
 defaults write com.apple.screencapture location -string "$HOME/Screenshots"
 #"Setting screenshot format to PNG"
 defaults write com.apple.screencapture type -string "png"
-#"Use `~/Downloads/Incomplete` to store incomplete downloads"
-defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
-defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Downloads/Incomplete"
-#"Don't prompt for confirmation before downloading"
-defaults write org.m0k.transmission DownloadAsk -bool false
 # Makes the Library folder visible in Finder
 chflags nohidden ~/Library
 
