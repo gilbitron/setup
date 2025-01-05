@@ -33,9 +33,6 @@ brew update && brew doctor
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 
 echo "Installing brew packages..."
-brew tap homebrew/cask
-brew tap homebrew/cask-versions
-brew tap homebrew/cask-fonts
 brew install git jq python ruby zsh wget awscli telnet tree mas dockutil
 
 echo "Installing Git..."
@@ -70,7 +67,7 @@ apps=(
   github
   iterm2
   spotify
-  zoomus
+  zoom
   onepassword
   setapp
   cursor
@@ -79,7 +76,7 @@ apps=(
   raycast
   orbstack
 )
-brew install --appdir="/Applications" ${apps[@]} --cask
+brew install --cask --appdir="/Applications" ${apps[@]}
 
 brew cleanup --cask
 brew cleanup
