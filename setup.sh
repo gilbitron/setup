@@ -76,7 +76,6 @@ apps=(
   setapp
   cursor
   visual-studio-code
-  fantastical
   raycast
   orbstack
 )
@@ -85,6 +84,7 @@ brew cleanup
 
 echo "Installing App Store apps..."
 mas install 1091189122 # Bear
+mas install 975937182 # Fantastical
 
 echo "Setting some sensible macOS defaults..."
 # Sets the mouse speed to 3
