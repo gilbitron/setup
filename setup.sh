@@ -78,6 +78,7 @@ apps=(
   visual-studio-code
   raycast
   orbstack
+  font-jetbrains-mono
 )
 brew install --cask --appdir="/Applications" ${apps[@]}
 brew cleanup
