@@ -26,6 +26,10 @@ xcode-select --install
 if test ! $(which brew); then
   echo "Installing Homebrew..."
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  echo >> "$HOME/.zprofile"
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 echo "Checking installation..."
@@ -68,7 +72,7 @@ apps=(
   iterm2
   spotify
   zoom
-  onepassword
+  1password
   setapp
   cursor
   visual-studio-code
@@ -77,8 +81,6 @@ apps=(
   orbstack
 )
 brew install --cask --appdir="/Applications" ${apps[@]}
-
-brew cleanup --cask
 brew cleanup
 
 echo "Installing App Store apps..."
@@ -145,6 +147,7 @@ dockutil --add '~/Downloads' --view grid --display stack --sort dateadded &>/dev
 dockutil --add '~/Screenshots' --view grid --display stack --sort dateadded &>/dev/null
 
 killall Finder
+killall Dock
 
 echo "Done!"
 echo "Remember to add your public key to Github: https://github.com/account/ssh"
